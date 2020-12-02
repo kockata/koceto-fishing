@@ -1,15 +1,12 @@
 package kostadin.ecommers.fishing.domain.entities;
-
-
 import org.springframework.security.core.GrantedAuthority;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "roles")
 public class Role extends BaseEntity implements GrantedAuthority {
-
     private String authority;
 
     public Role() {
@@ -21,6 +18,7 @@ public class Role extends BaseEntity implements GrantedAuthority {
 
 
     @Override
+    @Column
     public String getAuthority() {
         return authority;
     }

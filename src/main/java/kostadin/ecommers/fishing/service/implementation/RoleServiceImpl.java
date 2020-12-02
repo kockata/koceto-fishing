@@ -2,7 +2,6 @@ package kostadin.ecommers.fishing.service.implementation;
 
 import kostadin.ecommers.fishing.domain.entities.Role;
 import kostadin.ecommers.fishing.domain.models.service.RoleServiceModel;
-import kostadin.ecommers.fishing.domain.models.service.UserServiceModel;
 import kostadin.ecommers.fishing.repository.RoleRepository;
 import kostadin.ecommers.fishing.service.RoleService;
 import org.modelmapper.ModelMapper;
@@ -43,6 +42,6 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public RoleServiceModel findByAuthority(String authority) {
-        return modelMapper.map(authority, RoleServiceModel.class);
+        return modelMapper.map(this.roleRepository.findByAuthority(authority), RoleServiceModel.class);
     }
 }
