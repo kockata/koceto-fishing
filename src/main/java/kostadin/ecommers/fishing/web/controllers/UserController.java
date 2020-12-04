@@ -1,5 +1,4 @@
 package kostadin.ecommers.fishing.web.controllers;
-
 import kostadin.ecommers.fishing.domain.models.binding.UserEditBindingModel;
 import kostadin.ecommers.fishing.domain.models.binding.UserRegisterBindingModel;
 import kostadin.ecommers.fishing.domain.models.service.UserServiceModel;
@@ -106,4 +105,32 @@ public class UserController extends BaseController {
         modelAndView.addObject("users", users);
         return super.view("all-users", modelAndView);
     }
+
+    @PostMapping("/set-user/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ModelAndView setUser (@PathVariable String id) {
+        this.userService.setUserRole(id, "user");
+        return super.redirect("/users/all");
+    }
+
+    @PostMapping("/set-superuser/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ModelAndView setSuperuser (@PathVariable String id) {
+        this.userService.setUserRole(id, "superuser");
+        return super.redirect("/users/all");
+    }
+
+    @PostMapping("/set-admin/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ModelAndView setAdmin (@PathVariable String id) {
+        this.userService.setUserRole(id, "admin");
+        return super.redirect("/users/all");
+    }
+
+
+
+
+
+
+
 }
