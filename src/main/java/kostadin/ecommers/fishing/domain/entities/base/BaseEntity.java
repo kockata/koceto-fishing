@@ -1,4 +1,4 @@
-package kostadin.ecommers.fishing.domain.entities;
+package kostadin.ecommers.fishing.domain.entities.base;
 
 import org.hibernate.annotations.GenericGenerator;
 

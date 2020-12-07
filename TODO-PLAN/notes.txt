@@ -1,0 +1,19 @@
+repository - CRUD; services use repository; use DTO (types)!! @Repository; it is a bean; is spec. over @Component repository is used like DAO(data access object), but in spring dao is entity manager extend JpaRepository<DesiredEntity, String(return type of PK)>
+service - @Service; it is a bean; business logic; is spec. over @Component
+By mapping application calls to the persistence layer, the DAO provides some specific data operations without exposing details of the database
+in service for getting all data we do it through serviceModel
+-serviceModel - combine the data from 2 tables if needed with the concrete fields and map them. MAKE CUSTOM MAPPING BETWEEN VIEW AND SERVICEMODEL
+ViewModel impl IHaveCustomMappings and ServiceModel impl IHave... 
+for each model override configure mappings 
+@Override
+public void configureMappings(ModelMapper mapper) {
+    mapper.createTypeMap(desiredEntity*.class, desiredServiceModel.class)
+            .addMapping(
+            entity -> entity.get*.*
+            (dto, value -> dto.set*((String) value)
+            )
+}
+//not important: libraries - 1st spring, second other, third our libraries
+in controller we use viewModel for the data and map it for the service model that we get from the service .stream.map(o,*ViewModel.class).collect
+we pass to the view from the controller a parameter that we receive named ModelAndView and say .addObject (attribute name - name of controller, list of the viewModels)
+

@@ -1,5 +1,6 @@
 package kostadin.ecommers.fishing.domain.entities;
 
+import kostadin.ecommers.fishing.domain.entities.base.BaseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -12,8 +13,6 @@ public class User extends BaseEntity implements UserDetails {
     private String password;
     private String email;
     private Set<Role> authorities;
-
-
 
     @Column(name = "username", unique = true, nullable = false, updatable = false)
     public String getUsername() {

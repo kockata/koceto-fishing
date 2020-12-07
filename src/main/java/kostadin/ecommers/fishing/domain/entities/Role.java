@@ -1,4 +1,5 @@
 package kostadin.ecommers.fishing.domain.entities;
+import kostadin.ecommers.fishing.domain.entities.base.BaseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import javax.persistence.Column;
 import javax.persistence.Entity;
