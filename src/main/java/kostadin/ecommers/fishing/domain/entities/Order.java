@@ -1,12 +1,10 @@
 package kostadin.ecommers.fishing.domain.entities;
 
 import kostadin.ecommers.fishing.domain.entities.base.BaseEntity;
-import kostadin.ecommers.fishing.domain.entities.base.Product;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
 
 @Entity

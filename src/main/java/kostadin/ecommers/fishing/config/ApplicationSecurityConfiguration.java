@@ -14,11 +14,12 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().disable()
+        http
+                .cors().disable()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/js/**", "/css/**").permitAll()
-                .antMatchers("/", "/users/register", "/users/login").anonymous()
+                .antMatchers("/js/**", "/css/**", "/img/**").permitAll()
+                .antMatchers("/", "/users/register", "/users/login", "/products/all").anonymous()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

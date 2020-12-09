@@ -1,6 +1,7 @@
 package kostadin.ecommers.fishing.service;
 
 
+import javassist.NotFoundException;
 import kostadin.ecommers.fishing.domain.models.service.ProductServiceModel;
 
 import java.util.List;

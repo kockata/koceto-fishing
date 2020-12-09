@@ -1,22 +1,20 @@
-package kostadin.ecommers.fishing.domain.entities.base;
-
-
-import kostadin.ecommers.fishing.domain.entities.Category;
-import kostadin.ecommers.fishing.domain.entities.Order;
+package kostadin.ecommers.fishing.domain.entities;
+import kostadin.ecommers.fishing.domain.entities.base.BaseEntity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Set;
 
-@Entity(name = "default_product")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Entity
+@Table(name = "default_product")
 public class Product extends BaseEntity {
     private String brand;
     private String model;
     private String description;
     private BigDecimal price;
     private String imageUrl;
-    private Category category;
-//    private Product product;
+    private List<Category> categories;
     private Order order;
 
     @Column(name = "brand" , nullable = false)
@@ -61,13 +59,24 @@ public class Product extends BaseEntity {
         this.imageUrl = imageUrl;
     }
 
-    @ManyToOne
-    public Category getCategory() {
-        return category;
+    @ManyToMany(targetEntity = Category.class, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "products_categories",
+            joinColumns = @JoinColumn(
+                    name = "product_id",
+                    referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "category_id",
+                    referencedColumnName = "id"
+            )
+    )
+    public List<Category> getCategories() {
+        return categories;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 //
 //    @ManyToOne(targetEntity = Product.class)

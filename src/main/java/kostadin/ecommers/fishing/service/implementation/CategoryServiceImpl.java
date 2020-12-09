@@ -1,5 +1,6 @@
 package kostadin.ecommers.fishing.service.implementation;
 
+import kostadin.ecommers.fishing.domain.entities.Category;
 import kostadin.ecommers.fishing.domain.models.service.CategoryServiceModel;
 import kostadin.ecommers.fishing.repository.CategoryRepository;
 import kostadin.ecommers.fishing.service.CategoryService;
@@ -30,5 +31,12 @@ public class CategoryServiceImpl implements CategoryService {
                 .stream()
                 .map(c->this.modelMapper.map(c, CategoryServiceModel.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public CategoryServiceModel addCategory(CategoryServiceModel categoryServiceModel) {
+        Category category = this.modelMapper.map(CategoryServiceModel.class, Category.class);
+        this.categoryRepository.saveAndFlush(category);
+        return this.modelMapper.map(category, CategoryServiceModel.class);
     }
 }

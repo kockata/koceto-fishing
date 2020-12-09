@@ -1,6 +1,6 @@
 package kostadin.ecommers.fishing.repository;
 
-import kostadin.ecommers.fishing.domain.entities.base.Product;
+import kostadin.ecommers.fishing.domain.entities.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,4 +12,5 @@ public interface ProductRepository extends JpaRepository<Product, String> {
 
     Optional<Product> findByBrandAndModel (String brand, String model);
 
+    Optional<Product> findProductById(String id);
 }
