@@ -9,4 +9,10 @@ public interface CategoryService {
     List<CategoryServiceModel> findAllCategories();
 
     CategoryServiceModel addCategory(CategoryServiceModel categoryServiceModel);
+
+    CategoryServiceModel findCategoryById (String id);
+
+    CategoryServiceModel editCategory(String id, CategoryServiceModel categoryServiceModel);
+
+    CategoryServiceModel deleteCategory (String id);
 }

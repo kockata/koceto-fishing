@@ -2,16 +2,16 @@ package kostadin.ecommers.fishing.web.controllers;
 
 import kostadin.ecommers.fishing.domain.models.binding.CategoryAddBindingModel;
 import kostadin.ecommers.fishing.domain.models.service.CategoryServiceModel;
+import kostadin.ecommers.fishing.domain.models.view.CategoryViewModel;
 import kostadin.ecommers.fishing.service.CategoryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/categories")
@@ -34,14 +34,53 @@ public class CategoryController extends BaseController {
     @PostMapping("/add")
     @PreAuthorize("hasRole('ROLE_SUPERUSER')")
     public ModelAndView addCategoryConfirm(@ModelAttribute CategoryAddBindingModel model) {
-        this.categoryService.addCategory(this.modelMapper.map(model, CategoryServiceModel.class));
+        CategoryServiceModel categoryServiceModel = this.modelMapper.map(model, CategoryServiceModel.class);
+        this.categoryService.addCategory(categoryServiceModel);
         return redirect("/categories/all");
     }
 
-//    @GetMapping("/all")
-//    @PreAuthorize("isAnonymous()")
-//    public ModelAndView getCategories() {
-//
-//    }
+    @GetMapping("/all")
+    @PreAuthorize("hasRole('ROLE_SUPERUSER')")
+    public ModelAndView getCategories(ModelAndView modelAndView) {
+        modelAndView.addObject(
+                "categories", this.categoryService
+                .findAllCategories()
+                .stream()
+                .map(c->this.modelMapper.map(c, CategoryViewModel.class))
+                .collect(Collectors.toList()));
+        return view("category/all-categories", modelAndView);
+    }
 
+    @GetMapping("/edit/{id}")
+    @PreAuthorize("hasRole('ROLE_SUPERUSER')")
+    public ModelAndView editCategory(@PathVariable String id, ModelAndView modelAndView) {
+        modelAndView.addObject("model", this.modelMapper
+                .map(this.categoryService
+                        .findCategoryById(id), CategoryViewModel.class));
+        return view("/category/edit-category", modelAndView);
+    }
+
+
+    @PostMapping("edit/{id}")
+    @PreAuthorize("hasRole('ROLE_SUPERUSER')")
+    public ModelAndView editCategoryConfirm(@PathVariable String id,@ModelAttribute CategoryAddBindingModel model) {
+        categoryService.editCategory(id, modelMapper.map(model,CategoryServiceModel.class));
+        return redirect("/categories/all");
+    }
+
+    @GetMapping("delete/{id}")
+    @PreAuthorize("hasRole('ROLE_SUPERUSER')")
+    public ModelAndView deleteCategory (@PathVariable String id, ModelAndView modelAndView) {
+        modelAndView.addObject(
+                "model", this.modelMapper.map(this.categoryService.findCategoryById(id),CategoryViewModel.class));
+        return view("category/delete-category", modelAndView);
+
+    }
+
+    @PostMapping("delete/{id}")
+    @PreAuthorize("hasRole('ROLE_SUPERUSER')")
+    public ModelAndView deleteCategoryConfirm (@PathVariable String id) {
+        this.categoryService.deleteCategory(id);
+        return redirect("/categories/all");
+    }
 }

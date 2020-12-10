@@ -13,41 +13,6 @@ public class ProductServiceModel extends BaseServiceModel {
     private List<CategoryServiceModel> categories;
     private OrderServiceModel order;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public String getBrand() {
         return brand;
     }
