@@ -52,6 +52,11 @@ public class UserController extends BaseController {
         return super.view("login");
     }
 
+    @PostMapping("/login")
+    public ModelAndView loginRedirect() {
+        return redirect("/home");
+    }
+
     @GetMapping("/profile")
     @PreAuthorize("isAuthenticated()")
     public ModelAndView profile(Principal principal, ModelAndView modelAndView) {

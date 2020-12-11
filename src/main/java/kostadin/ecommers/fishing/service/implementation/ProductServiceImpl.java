@@ -47,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
             throw new ProductAlreadyExistException("Product already exist!");
         }
         product = this.modelMapper.map(model, Product.class);
-        product = this.productRepository.save(product);
+        product = this.productRepository.saveAndFlush(product);
         return this.modelMapper.map(product, ProductServiceModel.class);
     }
 

@@ -2,6 +2,7 @@ package kostadin.ecommers.fishing.domain.models.binding;
 
 import kostadin.ecommers.fishing.domain.models.service.CategoryServiceModel;
 import kostadin.ecommers.fishing.domain.models.service.OrderServiceModel;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -11,10 +12,9 @@ public class ProductAddBindingModel {
     private String model;
     private String description;
     private BigDecimal price;
-    private String imageUrl;
+    private MultipartFile image;
     private List<String> categories;
-    private BigDecimal discountedPrice;
-    private OrderServiceModel order;
+    //private OrderServiceModel order;
 
 
     public String getBrand() {
@@ -49,12 +49,12 @@ public class ProductAddBindingModel {
         this.price = price;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public MultipartFile getImage() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage(MultipartFile image) {
+        this.image = image;
     }
 
     public List<String> getCategories() {
@@ -65,19 +65,19 @@ public class ProductAddBindingModel {
         this.categories = categories;
     }
 
-    public BigDecimal getDiscountedPrice() {
-        return discountedPrice;
-    }
-
-    public void setDiscountedPrice(BigDecimal discountedPrice) {
-        this.discountedPrice = discountedPrice;
-    }
-
-    public OrderServiceModel getOrder() {
-        return order;
-    }
-
-    public void setOrder(OrderServiceModel order) {
-        this.order = order;
-    }
+//    public BigDecimal getDiscountedPrice() {
+//        return discountedPrice;
+//    }
+//
+//    public void setDiscountedPrice(BigDecimal discountedPrice) {
+//        this.discountedPrice = discountedPrice;
+//    }
+//
+//    public OrderServiceModel getOrder() {
+//        return order;
+//    }
+//
+//    public void setOrder(OrderServiceModel order) {
+//        this.order = order;
+//    }
 }
